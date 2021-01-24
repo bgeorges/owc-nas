@@ -9,6 +9,17 @@
 * Fedora 33 WS
 
 ## Steps
+Before we create the RAID we first need to create LVM Volumes.
+The logical volume creation steps are: 
+1. Create phyiscal volumes
+1. Create volume groups
+1. Create logical volumes
+
+Once this is done we will create the RAID. 
+The steps to create the RAID are:
+1. Using Cockpit
+2. Command line
+
 ### Add physycal disks
 first check if they are here
 ```bash
