@@ -20,8 +20,8 @@ The steps to create the RAID are:
 1. Using Cockpit
 2. Command line
 
-### Add physycal disks
-first check if they are here
+### Create physycal volumes
+first check if they show up after adding them to the OWC enclosure. The connection is using thunderbolt 3, which fedora 33 supported out of the box.
 ```bash
 $ sudo lsblk -f
 ```
@@ -42,11 +42,11 @@ nvme0n1
 ├─nvme0n1p2 ext4        1.0                            e2628b16-57a5-46d9-9633-e1e56bdff69d    699.9M    21% /boot
 └─nvme0n1p3 btrfs               fedora_localhost-live 0dc9ae69-4b4d-4b98-ae1f-3cf4a910c978    916.3G     1% /home
 ```
-add the physical disks
+Define LVM physical volumes ou of the physical disks added in the OWC bay, /dev/sd[b-e]
 ```bash
-$ sudo pvcreate /dev/sdb-e
+$ sudo pvcreate /dev/sd[b-e]
 ```
-Now you should see them as physical volume
+Now you should see them as physical volume. note that they are formatted as lvm type partitions.
 
 ```bash
 $ sudo pvs
@@ -109,3 +109,17 @@ $ sudo pvdisplay
 ```
 Note that they are not added to any Volume Groups yet. 
 
+#### create volume group
+
+```bash
+$ sudo vgcreate $VG /dev/sd[b-e]
+Volume group "OWC_S1_VG" successfully created
+$ sudo pvscan -v 
+  PV /dev/sdb   VG OWC_S1_VG       lvm2 [931.51 GiB / 931.51 GiB free]
+  PV /dev/sdc   VG OWC_S1_VG       lvm2 [931.51 GiB / 931.51 GiB free]
+  PV /dev/sdd   VG OWC_S1_VG       lvm2 [931.51 GiB / 931.51 GiB free]
+  PV /dev/sde   VG OWC_S1_VG       lvm2 [931.51 GiB / 931.51 GiB free]
+  Total: 4 [<3.64 TiB] / in use: 4 [<3.64 TiB] / in no VG: 0 [0   ]
+
+```
+Voilà
