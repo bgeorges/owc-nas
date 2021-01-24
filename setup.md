@@ -1,12 +1,12 @@
-#Setting up a NAS from scratch
+# Setting up a NAS from scratch
 
-##hardware
-Intel NUC / Core i7 10th Gen 
-OWC Thunderbay 4 mini
-4 x 1TB SSDs [Samsung EVO Basic] 
+## hardware
+* Intel NUC / Core i7 10th Gen 
+* OWC Thunderbay 4 mini
+* 4 x 1TB SSDs [Samsung EVO Basic] 
 
 ## Software
-Fedora 33 WS
+* Fedora 33 WS
 
 ## Steps
 ### Add physycal disks
