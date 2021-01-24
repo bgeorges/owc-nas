@@ -12,7 +12,7 @@
 ### Add physycal disks
 first check if they are here
 ```bash
-$ do lsblk -f
+$ sudo lsblk -f
 ```
 Should return something like this:
 ```bash
@@ -35,3 +35,66 @@ add the physical disks
 ```bash
 $ sudo pvcreate /dev/sdb-e
 ```
+Now you should see them as physical volume
+
+```bash
+$ sudo pvs
+  PV         VG Fmt  Attr PSize   PFree  
+  /dev/sdb      lvm2 ---  931.51g 931.51g
+  /dev/sdc      lvm2 ---  931.51g 931.51g
+  /dev/sdd      lvm2 ---  931.51g 931.51g
+  /dev/sde      lvm2 ---  931.51g 931.51g
+```
+Or more details using the `pvdisplay` command
+```bash
+$ sudo pvdisplay
+  "/dev/sdb" is a new physical volume of "931.51 GiB"
+  --- NEW Physical volume ---
+  PV Name               /dev/sdb
+  VG Name               
+  PV Size               931.51 GiB
+  Allocatable           NO
+  PE Size               0   
+  Total PE              0
+  Free PE               0
+  Allocated PE          0
+  PV UUID               DELucN-iozl-AhyW-Ij1j-yAZ0-daiQ-6QAiT0
+   
+  "/dev/sdc" is a new physical volume of "931.51 GiB"
+  --- NEW Physical volume ---
+  PV Name               /dev/sdc
+  VG Name               
+  PV Size               931.51 GiB
+  Allocatable           NO
+  PE Size               0   
+  Total PE              0
+  Free PE               0
+  Allocated PE          0
+  PV UUID               JUuu4M-fmeZ-j7kA-irUY-3Xom-lnxY-bczFIh
+   
+  "/dev/sdd" is a new physical volume of "931.51 GiB"
+  --- NEW Physical volume ---
+  PV Name               /dev/sdd
+  VG Name               
+  PV Size               931.51 GiB
+  Allocatable           NO
+  PE Size               0   
+  Total PE              0
+  Free PE               0
+  Allocated PE          0
+  PV UUID               FNG91w-x9p2-bJgR-5pcX-b21g-Ghl6-7Qm8pq
+   
+  "/dev/sde" is a new physical volume of "931.51 GiB"
+  --- NEW Physical volume ---
+  PV Name               /dev/sde
+  VG Name               
+  PV Size               931.51 GiB
+  Allocatable           NO
+  PE Size               0   
+  Total PE              0
+  Free PE               0
+  Allocated PE          0
+  PV UUID               4hs98p-yf3a-eny4-TLJs-PUnx-8r19-ElxZ73
+```
+Note that they are not added to any Volume Groups yet. 
+
